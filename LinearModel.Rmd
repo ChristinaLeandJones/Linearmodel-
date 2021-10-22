@@ -41,6 +41,9 @@ basicNN + geom_point() + geom_smooth(method=lm)
 The greater the pounds of arm force(ARM), the greater the simulation(SIMS)
 
 
+This scatter plot shows the all the individuals scores and the corresponding ARM and SIMS. The blue line which is the best linear fit to predict what an average SIMS response would be for ARM strength. 
+The shaded part is the uncertainty of the blue line. 
+
 ```{r}
 cor(SIMS~ARM,data=data)
 ```
@@ -57,13 +60,28 @@ The equation is SIMS = -4.095160 + 0.054563 * ARM
 newData=data.frame(GRIP=94,ARM=88)
 predict.lm(model.1,newData,interval="prediction")
 ```
-
+Fit is the predict ARM score when you an ARM force of 88. 
+The lwr and upr are the 95% confidence intervals for predicted SIMS scores when the ARM is 88. 
 
 ## SIMS~GRIP Regression 
 
 ```{r}
 plot(SIMS~GRIP,data=data)
 ```
+
+```{r}
+basicNN <- ggplot(data,aes(y=SIMS,x=GRIP))
+```
+
+```{r}
+model.1 <- lm(SIMS~ARM,data=data)
+summary.lm(model.1)
+```
+
+```{r}
+basicNN + geom_point() + geom_smooth(method=lm)
+``` 
+
 
 
 The greater the pounds of grip force(GRIP), the greater the simulation(SIMS)
@@ -78,8 +96,13 @@ This number is the correlation between SIMS and GRIP force. Correlation is a mea
 model.1 <- lm(SIMS~GRIP,data=data)
 summary.lm(model.1)
 ```
+The equation is SIMS = -4.809675 + 0.045463 * GRIP
 
 
+```{r}
+newData=data.frame(GRIP=94,ARM=88)
+predict.lm(model.1,newData,interval="prediction")
+```
 
 
 ## SIMS~ARM+GRIP Regression 
