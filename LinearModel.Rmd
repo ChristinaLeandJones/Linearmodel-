@@ -22,6 +22,9 @@ Form three regression models; Model1 is SIMS~ARM, Model2 is SIMS~GRIP, and Model
 plot(SIMS~ARM,data=data)
 ```
 
+The greater the pounds of arm force(ARM), the greater the simulation(SIMS)
+
+
 ```{r}
 basicNN <- ggplot(data,aes(y=SIMS,x=ARM))
 ```
@@ -35,10 +38,11 @@ summary.lm(model.1)
 
 ```{r}
 basicNN + geom_point() + geom_smooth(method=lm)
+
+
 ``` 
 
 
-The greater the pounds of arm force(ARM), the greater the simulation(SIMS)
 
 
 This scatter plot shows the all the individuals scores and the corresponding ARM and SIMS. The blue line which is the best linear fit to predict what an average SIMS response would be for ARM strength. 
@@ -69,12 +73,15 @@ The lwr and upr are the 95% confidence intervals for predicted SIMS scores when 
 plot(SIMS~GRIP,data=data)
 ```
 
+The greater the pounds of grip strength (GRIP), the greater the simulation(SIMS)
+
+
 ```{r}
 basicNN <- ggplot(data,aes(y=SIMS,x=GRIP))
 ```
 
 ```{r}
-model.1 <- lm(SIMS~ARM,data=data)
+model.1 <- lm(SIMS~GRIP,data=data)
 summary.lm(model.1)
 ```
 
@@ -82,9 +89,10 @@ summary.lm(model.1)
 basicNN + geom_point() + geom_smooth(method=lm)
 ``` 
 
+This scatter plot shows the all the individuals scores and the corresponding GRIP and SIMS. The blue line which is the best linear fit to predict what an average SIMS response would be for GRIP strength. 
+The shaded part is the uncertainty of the blue line. 
 
 
-The greater the pounds of grip force(GRIP), the greater the simulation(SIMS)
 
 ```{r}
 cor(SIMS~GRIP,data=data)
@@ -93,19 +101,48 @@ cor(SIMS~GRIP,data=data)
 This number is the correlation between SIMS and GRIP force. Correlation is a measure of the linear association between the two variables.
 
 ```{r}
-model.1 <- lm(SIMS~GRIP,data=data)
-summary.lm(model.1)
+model.2 <- lm(SIMS~GRIP,data=data)
+summary.lm(model.2)
 ```
 The equation is SIMS = -4.809675 + 0.045463 * GRIP
 
 
 ```{r}
 newData=data.frame(GRIP=94,ARM=88)
-predict.lm(model.1,newData,interval="prediction")
+predict.lm(model.2,newData,interval="prediction")
 ```
 
 
+Model 1 (SIMS~ARM)has a slightly higher Residual standard error score of 1.226 while model 2 (SIMS~GRIP) scored 1.22
+
+
+model 1 (SIMS~ARM) has a higher adjusted R squared score of 0.467 while model 2 (SIMS~GRIP)scored a lower with 0.4053
+
+Model 
+
 ## SIMS~ARM+GRIP Regression 
 
+
+```{r}
+model.3 <- lm(SIMS~ARM + GRIP,data=data)
+summary.lm(model.3)
+``` 
+
+Model 3 appears to be the better model because the adjusted R squared 
+
+## Inferential test 
+The is the inferential test to compare models 
+This test is an anova 
+
+$H_O$ There is no difference in how well each model fit the data between models  (model1,model2)
+$H_A$ There is a difference in how well each model fits th data between models (model1,model2)
+
+```{r}
+anova(model.1,model.3)
+```
+
+The p value is 0.00004994 which is very low.
+
+We reject the Null hypothesis because the P Value is so low , There is a difference between model1 and model3 ,we have evidence that model3 is better then model1
 
 ## MODEL COMPARISONS 
