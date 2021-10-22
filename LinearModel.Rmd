@@ -22,6 +22,22 @@ Form three regression models; Model1 is SIMS~ARM, Model2 is SIMS~GRIP, and Model
 plot(SIMS~ARM,data=data)
 ```
 
+```{r}
+basicNN <- ggplot(data,aes(y=SIMS,x=ARM))
+```
+
+
+
+```{r}
+model.1 <- lm(SIMS~ARM,data=data)
+summary.lm(model.1)
+```
+
+```{r}
+basicNN + geom_point() + geom_smooth(method=lm)
+``` 
+
+
 The greater the pounds of arm force(ARM), the greater the simulation(SIMS)
 
 
