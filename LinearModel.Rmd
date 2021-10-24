@@ -1,5 +1,5 @@
 ---
-title: "LinearModel"
+title: "Linear Model"
 author: "ChristinaJones"
 date: "10/19/2021"
 output: html_document
@@ -22,7 +22,9 @@ Form three regression models; Model1 is SIMS~ARM, Model2 is SIMS~GRIP, and Model
 plot(SIMS~ARM,data=data)
 ```
 
-The greater the pounds of arm force(ARM), the greater the simulation(SIMS)
+This scatter plot shows that the greater the pounds of arm force(ARM), the greater the simulation(SIMS)
+
+
 
 
 ```{r}
@@ -73,7 +75,8 @@ The lwr and upr are the 95% confidence intervals for predicted SIMS scores when 
 plot(SIMS~GRIP,data=data)
 ```
 
-The greater the pounds of grip strength (GRIP), the greater the simulation(SIMS)
+This scatter plot shows that the greater the pounds of grip strength(GRIP), the greater the simulation(SIMS)
+
 
 
 ```{r}
@@ -111,7 +114,7 @@ The equation is SIMS = -4.809675 + 0.045463 * GRIP
 newData=data.frame(GRIP=94,ARM=88)
 predict.lm(model.2,newData,interval="prediction")
 ```
-
+Fit is the predicted SIMS score when the GRIP strength is 94. 
 
 Model 1 (SIMS~ARM)has a slightly higher Residual standard error score of 1.226 while model 2 (SIMS~GRIP) scored 1.22
 
@@ -129,6 +132,11 @@ summary.lm(model.3)
 ``` 
 
 Model 3 appears to be the better model because the adjusted R squared 
+
+```{r}
+cor(SIMS~ARM + GRIP,data=data)
+```
+
 
 ## Inferential test 
 The is the inferential test to compare models 
