@@ -115,13 +115,16 @@ newData=data.frame(GRIP=94,ARM=88)
 predict.lm(model.2,newData,interval="prediction")
 ```
 Fit is the predicted SIMS score when the GRIP strength is 94. 
+The lwr and upr at 95% confidence intervals for the predicted SIMS score when the GRIP score is 94. 
 
-Model 1 (SIMS~ARM)has a slightly higher Residual standard error score of 1.226 while model 2 (SIMS~GRIP) scored 1.22
+
+## Comparing MODEL 1 and MODEL 2
 
 
-model 1 (SIMS~ARM) has a higher adjusted R squared score of 0.467 while model 2 (SIMS~GRIP)scored a lower with 0.4053
 
-Model 
+Model 1 (SIMS~ARM)has a slightly higher residual standard error score of 1.226 while Model 2 (SIMS~GRIP) scored 1.295
+Model 1 (SIMS~ARM) has a higher adjusted R squared score of 0.467 while Model 2 (SIMS~GRIP)scored a lower with 0.4053
+Model1 appears to be slightly better model because it has a lower residual standard error score then Model 2 along with the higher adjusted R square score.  
 
 ## SIMS~ARM+GRIP Regression 
 
@@ -131,11 +134,20 @@ model.3 <- lm(SIMS~ARM + GRIP,data=data)
 summary.lm(model.3)
 ``` 
 
-Model 3 appears to be the better model because the adjusted R squared 
+Model 3 appears to be the better model then Model 1 and model 2  because the adjusted R squared score and a scored lower in the residual standard error. 
 
 ```{r}
 cor(SIMS~ARM + GRIP,data=data)
 ```
+
+This number is the correlation between SIMS~ARM+GRIP. Correlation is a measure of the linear association between the variables.
+
+```{r}
+newData=data.frame(GRIP=94,ARM=88)
+predict.lm(model.3,newData,interval="prediction")
+```
+
+Fit is the prediction score of SIMS when the when you have a GRIP strength of 94 and an ARM strength of of 88. The lwr and upr at 95% confidence intervals for the predicted SIMS score when the GRIP score is 94 and an ARM strength of 88. 
 
 
 ## Inferential test 
