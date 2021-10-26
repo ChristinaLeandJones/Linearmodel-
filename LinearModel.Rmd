@@ -152,9 +152,11 @@ Fit is the prediction score of SIMS when the when you have a GRIP strength of 94
 
 ## Inferential test 
 The is the inferential test to compare models 
+
 This test is an anova 
 
 $H_O$ There is no difference in how well each model fit the data between models  (model1,model2)
+
 $H_A$ There is a difference in how well each model fits th data between models (model1,model2)
 
 ```{r}
@@ -165,4 +167,4 @@ The p value is 0.00004994 which is very low.
 
 We reject the Null hypothesis because the P Value is so low , There is a difference between model1 and model3 ,we have evidence that model3 is better then model1
 
-## MODEL COMPARISONS 
+
